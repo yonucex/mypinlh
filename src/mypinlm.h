@@ -1,21 +1,18 @@
-#ifndef MYPINLM_H
-#define MYPINLM_H
+#ifndef MyPinLM_h
+#define MyPinLM_h
 
+#include <Arduino.h>
 #include <ModbusMaster.h>
 
-// คลาสสำหรับการจัดการการสื่อสาร Modbus กับ MYPIN LM
-class MYPINLM {
-private:
-    ModbusMaster node; // ตัวแปรสำหรับการจัดการ Modbus
-    uint8_t deviceID;  // ID ของอุปกรณ์บนเครือข่าย Modbus
+class MyPinLM {
+  public:
+    MyPinLM(uint8_t deviceID, Stream &port); // Constructor
+    void begin(long baudRate);
+    float readWeight(); // Placeholder for function to read weight
 
-public:
-    MYPINLM(uint8_t id); // คอนสตรักเตอร์ที่รับ ID ของอุปกรณ์
-
-    void begin(long baudRate, uint8_t config); // เริ่มการสื่อสาร
-    float readWeight(); // อ่านค่าน้ำหนัก
-    uint16_t readParameter(uint16_t address); // อ่านพารามิเตอร์จากอุปกรณ์
-    uint16_t writeParameter(uint16_t address, uint16_t value); // เขียนพารามิเตอร์ไปยังอุปกรณ์
+  private:
+    ModbusMaster node;
+    uint8_t _deviceID;
 };
 
-#endif // MYPINLM_H
+#endif // MyPinLM_h
